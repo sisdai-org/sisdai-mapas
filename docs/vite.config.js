@@ -15,4 +15,5 @@ export default defineConfig({
       ),
     },
   },
+  ssr: { noExternal: ['ol-displaced-points', 'circle-properties'] },
 })
