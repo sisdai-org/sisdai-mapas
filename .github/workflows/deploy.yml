@@ -1,0 +1,41 @@
+name: Despliegue sisdai-mapas
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v6
+
+      - name: Instalar dependencias y compilar
+        run: |
+          npm install
+          npm run build
+      - name:
+          Despliegue a ambiente de desarrollo DEVELOP (rama develop →
+          dev-mapas.sisdai.org)
+        if: github.ref == 'refs/heads/develop'
+        uses: SamKirkland/FTP-Deploy-Action@110f9186c050f71550953127052e77650219c287
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: docs/.vitepress/dist/
+          server-dir: /dev-mapas/
+
+      - name: Deploy a ambiente de PRODUCCIÓN (rama main → dev-mapas.sisdai.org)
+        if: github.ref == 'refs/heads/main'
+        uses: SamKirkland/FTP-Deploy-Action@110f9186c050f71550953127052e77650219c287
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: docs/.vitepress/dist/
+          server-dir: /mapas/

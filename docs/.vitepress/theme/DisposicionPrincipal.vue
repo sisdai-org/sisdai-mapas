@@ -16,7 +16,6 @@ const { frontmatter, page, theme } = useData()
   >
     Ir a contenido principal
   </a>
-  <SisdaiNavegacionGobMx />
   <NavegacionPrincipal
     :nav="theme.nav"
     :ruta="page.relativePath"
@@ -28,7 +27,4 @@ const { frontmatter, page, theme } = useData()
   <PaginaInicio v-else-if="frontmatter.home" />
 
   <PaginaMenu v-else />
-
-  <SisdaiPiePaginaConahcyt />
-  <SisdaiPiePaginaGobMx />
 </template>

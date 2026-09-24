@@ -9,11 +9,25 @@ const { ruta } = toRefs(props)
 
 <template>
   <SisdaiNavegacionPrincipal>
+    <template #identidad>
+      <a
+        href="https://sisdai.org"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-hiperviculo-logo"
+      >
+        <img
+          :src="`/sisdai.png`"
+          class="nav-logo color-invertir"
+          alt="Sisdai."
+        />
+      </a>
+    </template>
     <template #complementario>
       <div class="nav-menu-contenedor">
         <a
           class="nav-hipervinculo"
-          href="https://sisdai.conahcyt.mx"
+          href="https://sisdai.org"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -21,7 +35,7 @@ const { ruta } = toRefs(props)
         </a>
         <a
           class="nav-hipervinculo"
-          href="https://github.com/CentroGeo/sisdai-mapas"
+          href="https://gitlab.com/sisdai-org/sisdai-mapas"
           target="_blank"
           rel="noopener noreferrer"
           :aria-label="`Repositorio de código sisdai-mapas versión ${pkg.version}`"
